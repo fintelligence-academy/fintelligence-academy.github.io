@@ -124,7 +124,7 @@
 
 \title{Machine Learning for Quantitative Investment}
 \author{Fintelligence}
-\date{2022-01-22}
+\date{2022-01-23}
 
 \begin{document}
 \maketitle
@@ -242,10 +242,10 @@ You can write citations, too. For example, we are using the \textbf{bookdown} pa
 \hypertarget{elements-of-machine-learning}{%
 \chapter{Elements of Machine Learning}\label{elements-of-machine-learning}}
 
-In a minimalism style, machine learning refers to how computers can ``learn'' by finding patterns in data and using them to make predictions. Mathematically, given a real-valued output \(Y\) and predictors vector \(X\) containing \(p\) variables, we assume a general function \(f\) to describe \(Y\):
+In a minimalism style, machine learning refers to how computers can ``learn'' by finding patterns in data and using them to make predictions. Mathematically, given a real-valued output \(y\) and predictors vector \(X\) containing \(p\) variables, we assume a general function \(f\) to describe \(y\):
 
 \begin{equation} 
-Y = f(X) + \epsilon
+y = f(X) + \epsilon
 \label{eq:ml01}
 \end{equation}
 
@@ -262,26 +262,100 @@ The foundation of practical machine learning is the data. Data drives everything
 \hypertarget{linear-regression}{%
 \section{Linear Regression}\label{linear-regression}}
 
-Linear regression adopts a linear function\(f^{Linear}\) to equation \eqref{eq:ml01} with learnable model parameters \(B =(\beta_0,\beta_1,...,\beta_p) \in (p+1,1)\):
+Linear regression adopts a linear function\(f^{Linear}\) to equation \eqref{eq:ml01} with learnable model parameters \(\beta^T =(\beta_0,\beta_1,...,\beta_p) \in (p,1)\):
 
 \begin{equation} 
-Y = B^T X + \epsilon  
+y = \beta^T X + \epsilon  
 \label{eq:lm01}
 \end{equation}
 
-Here we assume the first column of \(X\) is all ones and thus \(\beta_0\) corresponds to the intercept term.
+Here we assume the first column of \(X\) is all ones as an ``intercept feature'' and thus \(\beta_0\) corresponds to the intercept term.
 
-The model given by \eqref{eq:lm01} defines the {\emph{population regression line}}, which is the best linear approximation to the true relationship between \(X\) and \(Y\). The population regression line is unobserved and we have access to a set of sample observations to compute an sample-based estimate line. Fundamentally, we apply a standard statistical approach of using information from a sample to estimate characteristics of a large population. Here the linear regression focus on the estimate of coefficient \(\hat{B}\). The most popular estimation
-method is {\emph{least squares}}.
+The model given by \eqref{eq:lm01} defines the {\emph{population regression line}}, which is the best linear approximation to the true relationship between \(X\) and \(u\). The population regression line is unobserved and we have access to a set of sample observations to compute an sample-based estimate line. Fundamentally, we apply a standard statistical approach of using information from a sample to estimate characteristics of a large population. Here the linear regression focus on the estimate of coefficient \(\hat{\beta}\).
 
-Ordinary least square (OLS) regression is an estimated model based on sample data. We require a property of unbiasedness for estimator \(\hat{B}\). Unbiased estimator does not systematically over- or under-estimate the true parameter \(B\).
+The most popular estimation method is {\emph{least squares}}, also known as Ordinary Least Squares (OLS). OLS regression is an estimated model based on sample data in which we pick the coefficients \(\hat{\beta}\) to minimize the residual sum of squares (RSS):
+
+\begin{equation} 
+RSS(\beta) = \sum_{i=1}^N (y_i - f(x_i))^2 = (y-X\beta)^T (y-X \beta)  
+\label{eq:lmrss}
+\end{equation}
+
+To minimize \eqref{eq:lmrss}, we differentiate the term with respect to \(\beta\) and obtain:
 
 \[
-\hat{B} = (X^TX)^{-1} X^T y
+\frac{\partial RSS}{\partial \beta} = -2X^T (y - X \beta) \\
+\frac{\partial RSS}{\partial \beta \partial \beta^T} =  2 X^TX
+\]
+
+Assuming that \(X\) has full column rank, hence \(X^TX\) is positive definite leading to optimality, we thus could set the first derivative to zero to get the \(\hat{\beta}\):
+
+\[
+X^T (y - X \beta) = 0  \\
+\Rightarrow  X^T y  =  X^T X \hat{\beta}
+\]
+
+We thus solve the unique solution:
+
+\begin{equation} 
+\hat{\beta} = (X^TX)^{-1} X^T y
+\label{eq:lmbeta}
+\end{equation}
+
+Please note all this derivation makes no assumptions about the validity of model - it simply finds the best linear fit to the data except from ensuring \(X\) is of full-rank. The non-full-rank case occurs most often when there is redundancy. A natural way to resolve the non-unique representation is to drop redundant columns in \(X\).
+
+Lastly, since \(\hat{y}=X \hat{\beta}\), we could form the predictions
+\begin{equation} 
+\hat{y} = X \hat{\beta} = (X(X^TX)^{-1} X^T) y
+\label{eq:lmyfit}
+\end{equation}
+
+We denote \(P=X(X^TX)^{-1} X^T\) which is projection matrix. Moreover, we could represent the residual \(\hat{\epsilon}\) with \(P\):
+\begin{equation} 
+\hat{\epsilon} = y - X \hat{\beta} = y - (X(X^TX)^{-1} X^T) y = (I_n - P) y
+\label{eq:lmresid}
+\end{equation}
+
+Note \(Q=I_n - P\) is also a projection matrix. There are nice properties of {\emph{projection matrices}} that we will use in the subsequent sections:
+\[
+Q^T=Q; \;Q^2=Q
+\]
+
+\hypertarget{sampling-uncertainty-and-statistical-inference}{%
+\subsection{Sampling Uncertainty and Statistical Inference}\label{sampling-uncertainty-and-statistical-inference}}
+
+We infer from \eqref{eq:lmbeta} that both \(\hat{\beta}\) and \(\hat{Y}= X \hat{\beta}\) are linear transformations of \(y\) as random variables. If we had collected different sample data of size \(n\), we would to be sure have different estimates, due to {\emph{sampling uncertainty}}. We want to quantify this uncertainty by using {\emph{sampling statistics}} and essentially get more control of our estimate coefficient \(\hat{\beta}\). Furthermore, the inclusion of uncertainty measure such as standard error enables us to conduct statistical inference.
+
+To pin down the sampling properties of \(\hat{\beta}\), we include supplementary assumptions including {\emph{uncorrelated residual}}, {\emph{constant variance of residual \(\sigma^2\)}}, and additionally {\emph{\(X\) is non-random}}. Based on the assumption, we infer the variance of \(y\):
+
+\begin{equation} 
+Var(y)=\sigma^2 I_n
+\label{eq:lmyvar}
+\end{equation}
+
+We could then derive the expectation of residual sum of squares (RSS):
+
+\[
+RSS = Y^T(1-P)Y  \\
+\Rightarrow  E[ Y^T(1-P)Y ] = (n-p) \sigma^2
+\]
+
+Hence we get the unbiased estimate of variance \(\hat{\sigma}^2 = \frac{RSS}{n-p}\). We next derive the variance-covariance matrix of the \(\hat{\beta}\) using equation \eqref{eq:lmyvar}:
+\[
+\begin{aligned}
+Var( \hat{\beta}) &= Var( X(X^TX)^{-1} X^T ) \\&= X(X^TX)^{-1} X^T Var(y) (X(X^TX)^{-1} X^T)^T \\&=\sigma^2 (X^TX)^{-1}
+\end{aligned}
+\]
+Therefore, the uncertainty in individual estimate \(\beta_j\) is quantified by its {\emph{standard error (\(SE\))}}
+\[
+\begin{aligned}
+SE(\beta_j) = \sqrt{ \frac{\sigma}{ (X^TX)^{-1}_{jj} }}
+\end{aligned}
 \]
 
 \hypertarget{rethinking-the-unbiasedness-of-ols}{%
 \subsection{Rethinking the Unbiasedness of OLS}\label{rethinking-the-unbiasedness-of-ols}}
+
+We require a property of unbiasedness for estimator \(\hat{B}\). Unbiased estimator does not systematically over- or under-estimate the true parameter \(B\).
 
 Consider the decomposition of mean squared error of an estimator \(\tilde{\theta}\) in estimating \(\theta\):
 
@@ -294,10 +368,30 @@ MSE(\tilde{\theta}) &= E[ \tilde{\theta} - \theta ]^2 \\
 
 Here the first term \(Var( \tilde{\theta} )\) is the variance, while the second term \([E( \tilde{\theta} ) - \theta ]^2\) is the squared bias.
 
-The Gauss-Markov theorem implies that the least squares estimator has the smallest mean squared error (MSE) of all {\emph{linear estimators with no bias}} (⚠️ pay attention to the ``no bias'' here). However, there may well exist a biased estimator with smaller mean squared error. Such an estimator would {\emph{trade a little bias for a larger reduction in variance}}. Put bluntly, {\emph{biased estimates are commonly used}} for better out-of-sample performance (i.e., less MSE in test set). In reality, any method that shrinks or sets to zero some of the least squares coefficients may result in a biased estimate.
+The Gauss-Markov (GM) theorem implies that the least squares estimator has the smallest mean squared error (MSE) of all {\emph{linear estimators with no bias}} (⚠️ pay attention to the ``no bias'' here). However, there may well exist a biased estimator with smaller mean squared error. Such an estimator would {\emph{trade a little bias for a larger reduction in variance}}. Put bluntly, {\emph{biased estimates are commonly used}} for better out-of-sample performance (i.e., less MSE in test set). In reality, any method that shrinks or sets to zero some of the least squares coefficients may result in a biased estimate.
 
-\hypertarget{assumptions-of-linear-model-and-violation-implications}{%
-\section{Assumptions of Linear Model and Violation Implications}\label{assumptions-of-linear-model-and-violation-implications}}
+\hypertarget{assumptions-of-linear-regression-and-violation-implications}{%
+\section{Assumptions of Linear Regression and Violation Implications}\label{assumptions-of-linear-regression-and-violation-implications}}
+
+The question for the assumption of linear regression is ill-posed and requires more context as we need to specify the desired properties that we want the linear model to hold. Hence, we start with the standard assumptions that guarantee the above GM theorem to hold for OLS regression estimate:
+1. There exists an additive linear model for \((X, Y)\) as equation \eqref{eq:ml01},
+\[
+Y= X \beta + \epsilon
+\]
+Where, \(\beta\) and \(X\) are {\emph{non-random}} while the randomness stem from \(\epsilon\)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  Zero Expected Mean of Residual: \(E[ \epsilon_i] = 0\)
+\item
+  Homoscedasticity: Constant Variance of Residual: \(Var(\epsilon_i)=\sigma^2 < \infty\)
+\item
+  Uncorrelated Residual Error: \(Cov(\epsilon_i, \epsilon_j)=0, \; \forall i\neq j\)
+\end{enumerate}
+
+Furthermore, if the error terms are 5. normally distributed and 6.identically and independently distributed (i.i.d.), we could infer that the OLS estimator becomes the Maximum Likelihood Estimation (MLE).
 
 \hypertarget{problem-1-non-linearity-of-the-data}{%
 \subsection*{Problem 1: Non-linearity of the Data}\label{problem-1-non-linearity-of-the-data}}
@@ -309,7 +403,7 @@ The linear regression model assumes that there is a straight-line relationship b
 \hypertarget{problem-2-correlation-of-error-terms}{%
 \subsection*{Problem 2: Correlation of Error Terms}\label{problem-2-correlation-of-error-terms}}
 
-An important assumption of the linear regression model is that the error terms \({\epsilon_i}\) are uncorrelated. Intuitively, if the errors are uncorrelated, then the fact that \(epsilon_i\) is positive provides little or no information about the sign of \(\epsilon_{i+1}\). One counterexample is to think about double a set of training observations \((X, Y)\), as \(X_{Copy} = [X;X], Y_{Copy}=[Y;Y]\).
+An important assumption of the linear regression model is that the error terms \({\epsilon_i}\) are uncorrelated. Intuitively, if the errors are uncorrelated, then the fact that \(epsilon_i\) is positive provides little or no information about the sign of \(\epsilon_{i+1}\). One counterexample is to think about double a set of training observations \((X, y)\), as \(X_{Copy} = [X;X], y_{Copy}=[y;y]\).
 
 The standard errors that are computed for the estimated regression coefficients or the fitted values are based on the assumption of uncorrelated error terms. If in fact there is correlation among the error terms, then the estimated standard errors will tend to {underestimate} the true standard errors. As a result, confidence and prediction intervals will be narrower than expected.
 
@@ -331,7 +425,7 @@ Collinearity refers to the situation in which a group of variables are closely r
 
 🔍 {Correlation matrix of the predictors} is a simple way to detect collinearity. Unfortunately, not all collinearity problems can be detected by inspection of the correlation matrix: it is possible for collinearity to exist between three or more variables even if no pair of variables has a particularly high correlation - this is called {\emph{multicollinearity}}.
 
-There are in twp practical solutions to the problem of collinearity. The first, and more straightforward one, is to {drop} one of the problematic variables from the regression. The second solution is to aggregate the collinear variables together into a single composite predictor. For example, apply {\href{https://en.wikipedia.org/wiki/Principal_component_analysis}{PCA}} (Principal Component Analysis) approach to model the highly correlated features group and extract the first PC component as the representative indicator.
+There are in two practical solutions to the problem of collinearity. The first, and more straightforward one, is to {\emph{drop}} one of the problematic variables from the regression. The second solution is to {\emph{aggregate}} the collinear variables together into a single composite predictor. For example, apply \href{https://en.wikipedia.org/wiki/Principal_component_analysis}{PCA} (Principal Component Analysis) approach to model the highly correlated features group and extract the first PC component as the representative indicator.
 
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}
