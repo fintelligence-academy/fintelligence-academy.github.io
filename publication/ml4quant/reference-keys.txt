@@ -1,8 +1,13 @@
 fig:nice-fig
 tab:nice-tab
-prerequisites
+eq:ml01
+eq:lm01
 intro
-literature
+elements-of-machine-learning
+linear-regression
+rethinking-the-unbiasedness-of-ols
+assumptions-of-linear-model-and-violation-implications
+conclusion
 methods
 math-example
 applications

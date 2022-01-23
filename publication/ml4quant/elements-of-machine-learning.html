@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 2 Elements of Machine Learning | Machine Learning for Quantitative Investment</title>
+<meta name="author" content="Fintelligence">
+<meta name="description" content="In a minimalism style, machine learning refers to how computers can “learn” by finding patterns in data and using them to make predictions. Mathematically, given a real-valued output \(Y\) and...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 2 Elements of Machine Learning | Machine Learning for Quantitative Investment">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/images/bg-quant.png">
+<meta property="og:description" content="In a minimalism style, machine learning refers to how computers can “learn” by finding patterns in data and using them to make predictions. Mathematically, given a real-valued output \(Y\) and...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 2 Elements of Machine Learning | Machine Learning for Quantitative Investment">
+<meta name="twitter:description" content="In a minimalism style, machine learning refers to how computers can “learn” by finding patterns in data and using them to make predictions. Mathematically, given a real-valued output \(Y\) and...">
+<meta name="twitter:image" content="/images/bg-quant.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Machine Learning for Quantitative Investment</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="active" href="elements-of-machine-learning.html"><span class="header-section-number">2</span> Elements of Machine Learning</a></li>
+<li><a class="" href="methods.html"><span class="header-section-number">3</span> Methods</a></li>
+<li><a class="" href="applications.html"><span class="header-section-number">4</span> Applications</a></li>
+<li><a class="" href="final-words.html"><span class="header-section-number">5</span> Final Words</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="elements-of-machine-learning" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> Elements of Machine Learning<a class="anchor" aria-label="anchor" href="#elements-of-machine-learning"><i class="fas fa-link"></i></a>
+</h1>
+<p>In a minimalism style, machine learning refers to how computers can “learn” by finding patterns in data and using them to make predictions. Mathematically, given a real-valued output <span class="math inline">\(Y\)</span> and predictors vector <span class="math inline">\(X\)</span> containing <span class="math inline">\(p\)</span> variables, we assume a general function <span class="math inline">\(f\)</span> to describe <span class="math inline">\(Y\)</span>:</p>
+<p><span class="math display" id="eq:ml01">\[\begin{equation} 
+Y = f(X) + \epsilon
+\tag{2.1}
+\end{equation}\]</span></p>
+<p>Where, <span class="math inline">\(f\)</span> is a fixed but unknown function, and <span class="math inline">\(\epsilon\)</span> is a zero-mean random error term, which is supposed to be independent of <span class="math inline">\(X\)</span>.</p>
+<p>The core of machine learning is a suite of data-driven algorithms for estimating <span class="math inline">\(f\)</span>. ML is based on <span style="color:#504EFF"><em>statistical learning theory</em></span> to design models to understand patterns and employs <span style="color:#504EFF"><em>optimization algorithms</em></span> to train the model to “learn” the pattern using input data.</p>
+<p>The foundation of practical machine learning is the data. Data drives everything else. The model can not learn much pattern without enough data and could even have biased behaviour if the data quality is poor. In contrast, with substantial data, the machine learning model could achieve impressive results beyond expectation. A vivid example is to check the google’s search engine - it is machine learning algorithm under the hood.</p>
+<blockquote>
+<p>“All models are wrong, but some are useful.” - George E.P. Box</p>
+</blockquote>
+<div id="linear-regression" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Linear Regression<a class="anchor" aria-label="anchor" href="#linear-regression"><i class="fas fa-link"></i></a>
+</h2>
+<p>Linear regression adopts a linear function<span class="math inline">\(f^{Linear}\)</span> to equation <a href="elements-of-machine-learning.html#eq:ml01">(2.1)</a> with learnable model parameters <span class="math inline">\(B =(\beta_0,\beta_1,...,\beta_p) \in (p+1,1)\)</span>:</p>
+<p><span class="math display" id="eq:lm01">\[\begin{equation} 
+Y = B^T X + \epsilon  
+\tag{2.2}
+\end{equation}\]</span></p>
+<p>Here we assume the first column of <span class="math inline">\(X\)</span> is all ones and thus <span class="math inline">\(\beta_0\)</span> corresponds to the intercept term.</p>
+<p>The model given by <a href="elements-of-machine-learning.html#eq:lm01">(2.2)</a> defines the <span style="color:#504EFF"><em>population regression line</em></span>, which is the best linear approximation to the true relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. The population regression line is unobserved and we have access to a set of sample observations to compute an sample-based estimate line. Fundamentally, we apply a standard statistical approach of using information from a sample to estimate characteristics of a large population. Here the linear regression focus on the estimate of coefficient <span class="math inline">\(\hat{B}\)</span>. The most popular estimation
+method is <span style="color:#504EFF"><em>least squares</em></span>.</p>
+<p>Ordinary least square (OLS) regression is an estimated model based on sample data. We require a property of unbiasedness for estimator <span class="math inline">\(\hat{B}\)</span>. Unbiased estimator does not systematically over- or under-estimate the true parameter <span class="math inline">\(B\)</span>.</p>
+<p><span class="math display">\[
+\hat{B} = (X^TX)^{-1} X^T y
+\]</span></p>
+<div id="rethinking-the-unbiasedness-of-ols" class="section level3" number="2.1.1">
+<h3>
+<span class="header-section-number">2.1.1</span> Rethinking the Unbiasedness of OLS<a class="anchor" aria-label="anchor" href="#rethinking-the-unbiasedness-of-ols"><i class="fas fa-link"></i></a>
+</h3>
+<p>Consider the decomposition of mean squared error of an estimator <span class="math inline">\(\tilde{\theta}\)</span> in estimating <span class="math inline">\(\theta\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+MSE(\tilde{\theta}) &amp;= E[ \tilde{\theta} - \theta ]^2 \\
+                    &amp;= Var( \tilde{\theta} ) +  [E( \tilde{\theta} ) - \theta ]^2
+\end{aligned}
+\]</span></p>
+<p>Here the first term <span class="math inline">\(Var( \tilde{\theta} )\)</span> is the variance, while the second term <span class="math inline">\([E( \tilde{\theta} ) - \theta ]^2\)</span> is the squared bias.</p>
+<p>The Gauss-Markov theorem implies that the least squares estimator has the smallest mean squared error (MSE) of all <span style="color:#504EFF"><em>linear estimators with no bias</em></span> (⚠️ pay attention to the “no bias” here). However, there may well exist a biased estimator with smaller mean squared error. Such an estimator would <span style="color:#504EFF"><em>trade a little bias for a larger reduction in variance</em></span>. Put bluntly, <span style="color:#504EFF"><em>biased estimates are commonly used</em></span> for better out-of-sample performance (i.e., less MSE in test set). In reality, any method that shrinks or sets to zero some of the least squares coefficients may result in a biased estimate.</p>
+</div>
+</div>
+<div id="assumptions-of-linear-model-and-violation-implications" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Assumptions of Linear Model and Violation Implications<a class="anchor" aria-label="anchor" href="#assumptions-of-linear-model-and-violation-implications"><i class="fas fa-link"></i></a>
+</h2>
+<div id="problem-1-non-linearity-of-the-data" class="section level3 unlisted unnumbered">
+<h3>Problem 1: Non-linearity of the Data<a class="anchor" aria-label="anchor" href="#problem-1-non-linearity-of-the-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>The linear regression model assumes that there is a straight-line relationship between the predictors and the response. If the true relationship is far from linear, then all of the conclusions that we draw from the fit are suspect.</p>
+<p>🔍 <em>Residual plots</em> are a useful visualization tool for identifying non-linearity. Given a fitted linear regression model, we can plot the residuals, <span class="math inline">\(e_i = y_i - \hat{y_i}\)</span>, versus the predictor <span class="math inline">\(x_i\)</span>. In the case of a multivariate regression model, we can plot the residuals versus the fitted values <span class="math inline">\(\hat{y_i}\)</span>. Independence assumption implies no discernible pattern. The presence of a pattern may indicate a problem with some aspect of the linear model. For instance, if residuals exhibit a clear U-shape, which provides a strong indication of non-linearity in the data.</p>
+</div>
+<div id="problem-2-correlation-of-error-terms" class="section level3 unlisted unnumbered">
+<h3>Problem 2: Correlation of Error Terms<a class="anchor" aria-label="anchor" href="#problem-2-correlation-of-error-terms"><i class="fas fa-link"></i></a>
+</h3>
+<p>An important assumption of the linear regression model is that the error terms <span class="math inline">\({\epsilon_i}\)</span> are uncorrelated. Intuitively, if the errors are uncorrelated, then the fact that <span class="math inline">\(epsilon_i\)</span> is positive provides little or no information about the sign of <span class="math inline">\(\epsilon_{i+1}\)</span>. One counterexample is to think about double a set of training observations <span class="math inline">\((X, Y)\)</span>, as <span class="math inline">\(X_{Copy} = [X;X], Y_{Copy}=[Y;Y]\)</span>.</p>
+<p>The standard errors that are computed for the estimated regression coefficients or the fitted values are based on the assumption of uncorrelated error terms. If in fact there is correlation among the error terms, then the estimated standard errors will tend to <span style="color:#504EFF">underestimate</span> the true standard errors. As a result, confidence and prediction intervals will be narrower than expected.</p>
+<p>Such residual correlations frequently occur in the context of <span style="color:#504EFF">time series data</span>, which consists of observations for which measurements are obtained at discrete points in time. There is the issue of <span style="color:#504EFF">residual <a href="https://en.wikipedia.org/wiki/Autocorrelation">autocorrelation</a></span> - tracking in the residuals that adjacent residuals may have similar values.</p>
+<p>In general, the assumption of uncorrelated errors is extremely important for linear regression as well as for other statistical methods, and good experimental design is crucial in order to mitigate the risk of such correlations.</p>
+</div>
+<div id="problem-3-outliers" class="section level3 unlisted unnumbered">
+<h3>Problem 3: Outliers<a class="anchor" aria-label="anchor" href="#problem-3-outliers"><i class="fas fa-link"></i></a>
+</h3>
+<p>An outlier is a point which is far from the value predicted by the model. Outliers can arise for a variety of reasons, such as incorrect data collection. They are quite common in real dataset.</p>
+<p>Residual plots can be used to identify outliers. If we believe that an outlier has occurred due to an error in data collection, then one solution is to simply remove the observation. Shrewd care and revised assumptions should be taken when removing outliers, since an outlier may instead indicate a deficiency with the model, such as a missing predictor. 2008 global financial crisis is a data point that needs justification to be discarded as outlier.</p>
+</div>
+<div id="problem-4-collinearity" class="section level3 unlisted unnumbered">
+<h3>Problem 4: 💥Collinearity<a class="anchor" aria-label="anchor" href="#problem-4-collinearity"><i class="fas fa-link"></i></a>
+</h3>
+<p>Collinearity refers to the situation in which a group of variables are closely related to one another. The presence of collinearity can pose problems in the regression context, since it can be difficult to separate out the individual effects of collinear variables on the response. Collinearity reduces the accuracy of the estimates of the regression coefficients, it causes the standard error for <span class="math inline">\(\hat{\beta_j}\)</span> to grow.</p>
+<p>🔍 <span style="color:#504EFF">Correlation matrix of the predictors</span> is a simple way to detect collinearity. Unfortunately, not all collinearity problems can be detected by inspection of the correlation matrix: it is possible for collinearity to exist between three or more variables even if no pair of variables has a particularly high correlation - this is called <span style="color:#504EFF"><em>multicollinearity</em></span>.</p>
+<p>There are in twp practical solutions to the problem of collinearity. The first, and more straightforward one, is to <span style="color:#504EFF">drop</span> one of the problematic variables from the regression. The second solution is to aggregate the collinear variables together into a single composite predictor. For example, apply <span style="color:#504EFF"><a href="https://en.wikipedia.org/wiki/Principal_component_analysis">PCA</a></span> (Principal Component Analysis) approach to model the highly correlated features group and extract the first PC component as the representative indicator.</p>
+</div>
+</div>
+<div id="conclusion" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"><i class="fas fa-link"></i></a>
+</h2>
+<p>Linear models were largely developed in the precomputer age of statistics, but there are still robust baseline model to apply in today’s computer era. They are simple and often provide an adequate and interpretable description of how the inputs affect the output. For prediction purposes they can sometimes outperform fancier nonlinear models, especially in situations with small numbers of training cases, low signal-to-noise ratio or sparse data.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="intro.html"><span class="header-section-number">1</span> Introduction</a></div>
+<div class="next"><a href="methods.html"><span class="header-section-number">3</span> Methods</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#elements-of-machine-learning"><span class="header-section-number">2</span> Elements of Machine Learning</a></li>
+<li>
+<a class="nav-link" href="#linear-regression"><span class="header-section-number">2.1</span> Linear Regression</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#rethinking-the-unbiasedness-of-ols"><span class="header-section-number">2.1.1</span> Rethinking the Unbiasedness of OLS</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#assumptions-of-linear-model-and-violation-implications"><span class="header-section-number">2.2</span> Assumptions of Linear Model and Violation Implications</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#problem-1-non-linearity-of-the-data">Problem 1: Non-linearity of the Data</a></li>
+<li><a class="nav-link" href="#problem-2-correlation-of-error-terms">Problem 2: Correlation of Error Terms</a></li>
+<li><a class="nav-link" href="#problem-3-outliers">Problem 3: Outliers</a></li>
+<li><a class="nav-link" href="#problem-4-collinearity">Problem 4: 💥Collinearity</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#conclusion"><span class="header-section-number">2.3</span> Conclusion</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Machine Learning for Quantitative Investment</strong>" was written by Fintelligence. It was last built on 2022-01-22.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

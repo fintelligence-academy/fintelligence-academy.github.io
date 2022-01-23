@@ -133,27 +133,43 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\hypertarget{prerequisites}{%
-\chapter{Prerequisites}\label{prerequisites}}
+\hypertarget{preface}{%
+\chapter*{Preface}\label{preface}}
+\addcontentsline{toc}{chapter}{Preface}
 
-This is an online book about machine learning application in quantitative investment presented by Fintelligence Academy.
+Welcome to the first edition of {Machine Learning for Quantitative Investment (ml4quant)}! This is an online book all about machine learning and data science methods in quantitative investment presented by \href{https://fintelligence-academy.github.io/}{Fintelligence Academy}: \url{https://fintelligence-academy.github.io/}.
 
-The \textbf{bookdown} package can be installed from CRAN or Github:
+The adoption of Machine Learning and Artificial Intelligence continues to progress from a niche activity to mainstream applications at an ever-accelerating pace in this Big Data era. Here at Fintelligence, we are embracing the ML in financial application.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{)}
-\CommentTok{\# or the development version}
-\CommentTok{\# devtools::install\_github("rstudio/bookdown")}
-\end{Highlighting}
-\end{Shaded}
+In this book, we aim to walk through the \ldots.
 
-Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading \texttt{\#}.
+Having quantitative research in mind, the intended audience is presumed interdisciplinary, fluent in mathematical notation, familiar with basic data science concepts. You may be surprised at the neglect of econometric/finance elements - we are confident to teach you the foundational knowledge of financial market along the reading journey. In addition, this book could be also interesting to those readers who are thinking of joining the quant workforce or data science community.
 
-To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): \url{https://yihui.name/tinytex/}.
+In another vein, this book also brings the mathematical foundations of basic machine learning concepts to the fore and collects the information in a single place so that a reader could learns both modern quantitative finance and machine learning. We assimilate and benefit core ideas from the two classical machine learning textbooks \emph{\href{https://www.statlearning.com/}{An Introduction to Statistical Learning} (ISL2)} and \emph{\href{https://hastie.su.domains/Papers/ESLII.pdf}{The Elements of Statistical Learning} (ESL)}, which are the best to-go reference books to learn machine learning. Here for ml4quant, we strive to strike a balance of difficulty in the middle level between the two books and season the topic with a new flavor of financial data science.
+
+We genuinely hope that both the quantitative researchers and data scientists could enjoy reading this interdisciplinary book and find it helpful.
+
+\begin{quote}
+``The best time to plant a tree is twenty years ago. The second best time is now.'' - Chinese Proverb by \href{https://en.wikipedia.org/wiki/Wang_Bo_(poet)}{Poet Wang Bo}
+
+``东隅已逝，桑榆非晚。''-王渤《滕王阁序》
+\end{quote}
 
 \hypertarget{intro}{%
 \chapter{Introduction}\label{intro}}
+
+Machine learning is the latest in a long line of attempts to distill human knowledge and reasoning into a form that is suitable for constructing computer automated systems. The enthusiastic practitioner who is interested to learn more about the magic behind successful machine learning algorithms currently faces a daunting set of pre-requisite knowledge:
+
+\begin{itemize}
+\item
+  Programming languages and data analysis tools
+\item
+  Large-scale computation and the associated frameworks
+\item
+  Mathematics and statistics and how machine learning builds on it
+\end{itemize}
+
+Machine learning builds upon the language of mathematics to express concepts that seem intuitively obvious but that are surprisingly difficult to formalize. Once formalized properly, we can gain insights into the task we want to solve.
 
 You can label chapter and section titles using \texttt{\{\#label\}} after them, e.g., we can reference Chapter \ref{intro}. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \ref{methods}.
 
@@ -223,10 +239,104 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 
 You can write citations, too. For example, we are using the \textbf{bookdown} package \citep{R-bookdown} in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015}.
 
-\hypertarget{literature}{%
-\chapter{Literature}\label{literature}}
+\hypertarget{elements-of-machine-learning}{%
+\chapter{Elements of Machine Learning}\label{elements-of-machine-learning}}
 
-Here is a review of existing methods.
+In a minimalism style, machine learning refers to how computers can ``learn'' by finding patterns in data and using them to make predictions. Mathematically, given a real-valued output \(Y\) and predictors vector \(X\) containing \(p\) variables, we assume a general function \(f\) to describe \(Y\):
+
+\begin{equation} 
+Y = f(X) + \epsilon
+\label{eq:ml01}
+\end{equation}
+
+Where, \(f\) is a fixed but unknown function, and \(\epsilon\) is a zero-mean random error term, which is supposed to be independent of \(X\).
+
+The core of machine learning is a suite of data-driven algorithms for estimating \(f\). ML is based on {\emph{statistical learning theory}} to design models to understand patterns and employs {\emph{optimization algorithms}} to train the model to ``learn'' the pattern using input data.
+
+The foundation of practical machine learning is the data. Data drives everything else. The model can not learn much pattern without enough data and could even have biased behaviour if the data quality is poor. In contrast, with substantial data, the machine learning model could achieve impressive results beyond expectation. A vivid example is to check the google's search engine - it is machine learning algorithm under the hood.
+
+\begin{quote}
+``All models are wrong, but some are useful.'' - George E.P. Box
+\end{quote}
+
+\hypertarget{linear-regression}{%
+\section{Linear Regression}\label{linear-regression}}
+
+Linear regression adopts a linear function\(f^{Linear}\) to equation \eqref{eq:ml01} with learnable model parameters \(B =(\beta_0,\beta_1,...,\beta_p) \in (p+1,1)\):
+
+\begin{equation} 
+Y = B^T X + \epsilon  
+\label{eq:lm01}
+\end{equation}
+
+Here we assume the first column of \(X\) is all ones and thus \(\beta_0\) corresponds to the intercept term.
+
+The model given by \eqref{eq:lm01} defines the {\emph{population regression line}}, which is the best linear approximation to the true relationship between \(X\) and \(Y\). The population regression line is unobserved and we have access to a set of sample observations to compute an sample-based estimate line. Fundamentally, we apply a standard statistical approach of using information from a sample to estimate characteristics of a large population. Here the linear regression focus on the estimate of coefficient \(\hat{B}\). The most popular estimation
+method is {\emph{least squares}}.
+
+Ordinary least square (OLS) regression is an estimated model based on sample data. We require a property of unbiasedness for estimator \(\hat{B}\). Unbiased estimator does not systematically over- or under-estimate the true parameter \(B\).
+
+\[
+\hat{B} = (X^TX)^{-1} X^T y
+\]
+
+\hypertarget{rethinking-the-unbiasedness-of-ols}{%
+\subsection{Rethinking the Unbiasedness of OLS}\label{rethinking-the-unbiasedness-of-ols}}
+
+Consider the decomposition of mean squared error of an estimator \(\tilde{\theta}\) in estimating \(\theta\):
+
+\[
+\begin{aligned}
+MSE(\tilde{\theta}) &= E[ \tilde{\theta} - \theta ]^2 \\
+                    &= Var( \tilde{\theta} ) +  [E( \tilde{\theta} ) - \theta ]^2
+\end{aligned}
+\]
+
+Here the first term \(Var( \tilde{\theta} )\) is the variance, while the second term \([E( \tilde{\theta} ) - \theta ]^2\) is the squared bias.
+
+The Gauss-Markov theorem implies that the least squares estimator has the smallest mean squared error (MSE) of all {\emph{linear estimators with no bias}} (⚠️ pay attention to the ``no bias'' here). However, there may well exist a biased estimator with smaller mean squared error. Such an estimator would {\emph{trade a little bias for a larger reduction in variance}}. Put bluntly, {\emph{biased estimates are commonly used}} for better out-of-sample performance (i.e., less MSE in test set). In reality, any method that shrinks or sets to zero some of the least squares coefficients may result in a biased estimate.
+
+\hypertarget{assumptions-of-linear-model-and-violation-implications}{%
+\section{Assumptions of Linear Model and Violation Implications}\label{assumptions-of-linear-model-and-violation-implications}}
+
+\hypertarget{problem-1-non-linearity-of-the-data}{%
+\subsection*{Problem 1: Non-linearity of the Data}\label{problem-1-non-linearity-of-the-data}}
+
+The linear regression model assumes that there is a straight-line relationship between the predictors and the response. If the true relationship is far from linear, then all of the conclusions that we draw from the fit are suspect.
+
+🔍 \emph{Residual plots} are a useful visualization tool for identifying non-linearity. Given a fitted linear regression model, we can plot the residuals, \(e_i = y_i - \hat{y_i}\), versus the predictor \(x_i\). In the case of a multivariate regression model, we can plot the residuals versus the fitted values \(\hat{y_i}\). Independence assumption implies no discernible pattern. The presence of a pattern may indicate a problem with some aspect of the linear model. For instance, if residuals exhibit a clear U-shape, which provides a strong indication of non-linearity in the data.
+
+\hypertarget{problem-2-correlation-of-error-terms}{%
+\subsection*{Problem 2: Correlation of Error Terms}\label{problem-2-correlation-of-error-terms}}
+
+An important assumption of the linear regression model is that the error terms \({\epsilon_i}\) are uncorrelated. Intuitively, if the errors are uncorrelated, then the fact that \(epsilon_i\) is positive provides little or no information about the sign of \(\epsilon_{i+1}\). One counterexample is to think about double a set of training observations \((X, Y)\), as \(X_{Copy} = [X;X], Y_{Copy}=[Y;Y]\).
+
+The standard errors that are computed for the estimated regression coefficients or the fitted values are based on the assumption of uncorrelated error terms. If in fact there is correlation among the error terms, then the estimated standard errors will tend to {underestimate} the true standard errors. As a result, confidence and prediction intervals will be narrower than expected.
+
+Such residual correlations frequently occur in the context of {time series data}, which consists of observations for which measurements are obtained at discrete points in time. There is the issue of {residual \href{https://en.wikipedia.org/wiki/Autocorrelation}{autocorrelation}} - tracking in the residuals that adjacent residuals may have similar values.
+
+In general, the assumption of uncorrelated errors is extremely important for linear regression as well as for other statistical methods, and good experimental design is crucial in order to mitigate the risk of such correlations.
+
+\hypertarget{problem-3-outliers}{%
+\subsection*{Problem 3: Outliers}\label{problem-3-outliers}}
+
+An outlier is a point which is far from the value predicted by the model. Outliers can arise for a variety of reasons, such as incorrect data collection. They are quite common in real dataset.
+
+Residual plots can be used to identify outliers. If we believe that an outlier has occurred due to an error in data collection, then one solution is to simply remove the observation. Shrewd care and revised assumptions should be taken when removing outliers, since an outlier may instead indicate a deficiency with the model, such as a missing predictor. 2008 global financial crisis is a data point that needs justification to be discarded as outlier.
+
+\hypertarget{problem-4-collinearity}{%
+\subsection*{Problem 4: 💥Collinearity}\label{problem-4-collinearity}}
+
+Collinearity refers to the situation in which a group of variables are closely related to one another. The presence of collinearity can pose problems in the regression context, since it can be difficult to separate out the individual effects of collinear variables on the response. Collinearity reduces the accuracy of the estimates of the regression coefficients, it causes the standard error for \(\hat{\beta_j}\) to grow.
+
+🔍 {Correlation matrix of the predictors} is a simple way to detect collinearity. Unfortunately, not all collinearity problems can be detected by inspection of the correlation matrix: it is possible for collinearity to exist between three or more variables even if no pair of variables has a particularly high correlation - this is called {\emph{multicollinearity}}.
+
+There are in twp practical solutions to the problem of collinearity. The first, and more straightforward one, is to {drop} one of the problematic variables from the regression. The second solution is to aggregate the collinear variables together into a single composite predictor. For example, apply {\href{https://en.wikipedia.org/wiki/Principal_component_analysis}{PCA}} (Principal Component Analysis) approach to model the highly correlated features group and extract the first PC component as the representative indicator.
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+Linear models were largely developed in the precomputer age of statistics, but there are still robust baseline model to apply in today's computer era. They are simple and often provide an adequate and interpretable description of how the inputs affect the output. For prediction purposes they can sometimes outperform fancier nonlinear models, especially in situations with small numbers of training cases, low signal-to-noise ratio or sparse data.
 
 \hypertarget{methods}{%
 \chapter{Methods}\label{methods}}
