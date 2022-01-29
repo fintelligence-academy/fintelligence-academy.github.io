@@ -7,6 +7,8 @@ eq:lmbeta
 eq:lmyfit
 eq:lmresid
 eq:lmyvar
+fig:unnamed-chunk-2
+tab:ML-factor-tab
 intro
 elements-of-machine-learning
 linear-regression
@@ -14,8 +16,12 @@ sampling-uncertainty-and-statistical-inference
 rethinking-the-unbiasedness-of-ols
 assumptions-of-linear-regression-and-violation-implications
 conclusion
-methods
-math-example
+modern-factor-investing
+overview-of-factor-investing
+years-of-factor-investing-a-literature-review
+limitedness-of-classical-factor-model-and-the-factor-zoo
+modern-factor-investing-in-the-big-data-and-machine-learning-trend
+chapter-conclusion
 applications
 example-one
 example-two
