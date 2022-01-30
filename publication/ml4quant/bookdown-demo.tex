@@ -411,13 +411,13 @@ In another vein, \citet{rosenberg1974extra} described the importance of the stoc
 \hypertarget{limitedness-of-classical-factor-model-and-the-factor-zoo}{%
 \section{Limitedness of Classical Factor Model and the Factor Zoo}\label{limitedness-of-classical-factor-model-and-the-factor-zoo}}
 
-The enduring success of fundamental factors stems from the fact that they are guided by academic theory, and, importantly, are supported by empirical evidence and reflect investment practice, i.e., they make money. However, the story of factors turn into a horror fiction ever since the 2008 Global Financial Crisis. It is not only that some well-acclaimed factors that outperform in the past start to underperform (Fama-French's Value factor is lacklustre, see Figure \ref{fig:fig-fac-decay}), but also there are some lurking \href{https://en.wikipedia.org/wiki/Black_swan_theory}{black swan events} that causing extreme outliers where the model could fail drastically. In statistics, this is usually associated with the {\emph{heavy-tailed}} distribution and we could sometimes remove or winsorize those data points as outliers when fitting a model. Nevertheless, in reality these outliers may mean you are doomed all at once.
+The enduring success of fundamental factors stems from the fact that they are guided by academic theory, and, importantly, are supported by empirical evidence and reflect investment practice, i.e., they make money. However, the story of factors turn into a horror fiction ever since the 2008 Global Financial Crisis. It is not only that some well-acclaimed factors that outperform in the past start to underperform (Fama-French's Value factor is lacklustre, see Figure \ref{fig:fig-fac-decay}), but also there are some lurking \href{https://en.wikipedia.org/wiki/Black_swan_theory}{black swan events} that causing extreme outliers where the model could fail drastically. In statistics, this is usually associated with the {\emph{heavy-tailed}} distribution and we could remove or winsorize those data points as outliers when fitting a model. Nevertheless, in reality, these outliers may mean you are doomed all at once.
 
 \begin{figure}
 \includegraphics[width=0.9\linewidth]{images/chapter3/fac_recent} \caption{Recent performance decay of Fama-French factor portfolios in US market}\label{fig:fig-fac-decay}
 \end{figure}
 
-To make a concrete example, lets remember David Viniar's, once the CFO of Goldman Sachs, famous explanation when Goldman's flagship GEO hedge fund had lost 27\% in 2007: {\emph{``We were seeing things that were 25-standard deviation moves, several days in a row.''}}. One commentator wryly noted:
+To make a concrete example, lets remember David Viniar's, once the CFO of Goldman Sachs, famous {\emph{25 sigma}} when Goldman's flagship GEO hedge fund had lost 27\% in 2007: {\emph{``We were seeing things that were 25-standard deviation moves, several days in a row.''}}. One commentator wryly noted:
 
 \begin{quote}
 That Viniar. What a comic. According to Goldman's mathematical models, August, Year of Our Lord 2007, was a very special month. Things were happening that were only supposed to happen once in every 100,000 years. Either that \ldots{} or Goldman's models were wrong (Bonner, 2007b).
@@ -433,9 +433,9 @@ Another interesting trend is the ``factor zoo'' \citep{harvey2019census}, which 
 \includegraphics[width=0.9\linewidth]{images/chapter3/factor_zoo} \caption{Out of control factor production (Harvey, 2019)}\label{fig:unnamed-chunk-2}
 \end{figure}
 
-This point out to the multiple testing problem: \emph{with so many factors tried, some will appear ``significant'' purely by chance}, and further indicates the peril of data mining, which may or may not be intentional. From a data science perspective, this also leads to the {\emph{high-dimension}} nature of the modern factor investing: we now have a ``zoo'' of available factor candidates and the traditional OLS linear regression is incompetent.
+It further points out to the multiple testing problem: \emph{with so many factors tried, some will appear ``significant'' purely by chance}, and further indicates the peril of data mining, which may or may not be intentional. From a data science perspective, this also leads to the {\emph{high-dimension}} nature of the modern factor investing: we now have a ``zoo'' of available factor candidates and the traditional OLS linear regression is incompetent.
 
-Therefore, the linear model is at most a compromise in the face of the low noise-to-signal ratio data in financial market.
+This is not to overlook the merits of linear model such as its transparency and interpretability. Given careful treatment and enhacncement such as regularization, linear model remains a competiteive baseline, especially in set-up with insufficient data input. However, its performance upper bound should not be inflated in the current data science world, with so many alternative and more expressive machine learning algorithms available: linear model is at most a parsimonious underfitted compromise (\emph{think about those hundreds of factors!}) in face of the high noise-to-signal ratio financial data.
 
 \hypertarget{modern-factor-investing-in-the-wave-of-data-and-machine-learning}{%
 \section{Modern Factor Investing in the Wave of Data and Machine Learning}\label{modern-factor-investing-in-the-wave-of-data-and-machine-learning}}
