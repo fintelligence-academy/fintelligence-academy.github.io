@@ -1,5 +1,3 @@
-fig:nice-fig
-tab:nice-tab
 eq:ml01
 eq:lm01
 eq:lmrss
@@ -7,7 +5,10 @@ eq:lmbeta
 eq:lmyfit
 eq:lmresid
 eq:lmyvar
+eq:facmodel
+fig:fig-fac-decay
 fig:unnamed-chunk-2
+fig:unnamed-chunk-3
 tab:ML-factor-tab
 intro
 elements-of-machine-learning
@@ -20,9 +21,5 @@ modern-factor-investing
 overview-of-factor-investing
 years-of-factor-investing-a-literature-review
 limitedness-of-classical-factor-model-and-the-factor-zoo
-modern-factor-investing-in-the-big-data-and-machine-learning-trend
+modern-factor-investing-in-the-wave-of-data-and-machine-learning
 chapter-conclusion
-applications
-example-one
-example-two
-final-words

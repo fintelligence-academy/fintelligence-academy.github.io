@@ -41,46 +41,6 @@
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -158,6 +118,8 @@ We genuinely hope that both the quantitative researchers and data scientists cou
 \hypertarget{intro}{%
 \chapter{Introduction}\label{intro}}
 
+Already, artificial intelligence is all around us, from self-driving cars to virtual assistants and software that translate or invest. Impressive progress has been made in AI in recent years, driven by exponential increases in computing power and by the availability of vast amounts of data, from software used to discover new drugs to recommendation algorithms used to predict our cultural interests.
+
 Machine learning is the latest in a long line of attempts to distill human knowledge and reasoning into a form that is suitable for constructing computer automated systems. The enthusiastic practitioner who is interested to learn more about the magic behind successful machine learning algorithms currently faces a daunting set of pre-requisite knowledge:
 
 \begin{itemize}
@@ -171,73 +133,11 @@ Machine learning is the latest in a long line of attempts to distill human knowl
 
 Machine learning builds upon the language of mathematics to express concepts that seem intuitively obvious but that are surprisingly difficult to formalize. Once formalized properly, we can gain insights into the task we want to solve.
 
-You can label chapter and section titles using \texttt{\{\#label\}} after them, e.g., we can reference Chapter \ref{intro}. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \ref{methods}.
+An underlying theme is that the acceleration of innovation and the velocity of disruption are hard to comprehend or anticipate and that these drivers constitute a source of constant surprise, even for the best connected and most well informed. Indeed, across all industries, there is clear evidence that the technologies that underpin the Fourth Industrial Revolution are having a major impact on businesses.
 
-Figures and tables with captions will be placed in \texttt{figure} and \texttt{table} environments, respectively.
+collaborative innovation
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{1}\NormalTok{))}
-\FunctionTok{plot}\NormalTok{(pressure, }\AttributeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.8\linewidth]{bookdown-demo_files/figure-latex/nice-fig-1} 
-
-}
-
-\caption{Here is a nice figure!}\label{fig:nice-fig}
-\end{figure}
-
-Reference a figure by its code chunk label with the \texttt{fig:} prefix, e.g., see Figure \ref{fig:nice-fig}. Similarly, you can reference tables generated from \texttt{knitr::kable()}, e.g., see Table \ref{tab:nice-tab}.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
-  \FunctionTok{head}\NormalTok{(iris, }\DecValTok{20}\NormalTok{), }\AttributeTok{caption =} \StringTok{\textquotesingle{}Here is a nice table!\textquotesingle{}}\NormalTok{,}
-  \AttributeTok{booktabs =} \ConstantTok{TRUE}
-\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{table}
-
-\caption{\label{tab:nice-tab}Here is a nice table!}
-\centering
-\begin{tabular}[t]{rrrrl}
-\toprule
-Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
-\midrule
-5.1 & 3.5 & 1.4 & 0.2 & setosa\\
-4.9 & 3.0 & 1.4 & 0.2 & setosa\\
-4.7 & 3.2 & 1.3 & 0.2 & setosa\\
-4.6 & 3.1 & 1.5 & 0.2 & setosa\\
-5.0 & 3.6 & 1.4 & 0.2 & setosa\\
-\addlinespace
-5.4 & 3.9 & 1.7 & 0.4 & setosa\\
-4.6 & 3.4 & 1.4 & 0.3 & setosa\\
-5.0 & 3.4 & 1.5 & 0.2 & setosa\\
-4.4 & 2.9 & 1.4 & 0.2 & setosa\\
-4.9 & 3.1 & 1.5 & 0.1 & setosa\\
-\addlinespace
-5.4 & 3.7 & 1.5 & 0.2 & setosa\\
-4.8 & 3.4 & 1.6 & 0.2 & setosa\\
-4.8 & 3.0 & 1.4 & 0.1 & setosa\\
-4.3 & 3.0 & 1.1 & 0.1 & setosa\\
-5.8 & 4.0 & 1.2 & 0.2 & setosa\\
-\addlinespace
-5.7 & 4.4 & 1.5 & 0.4 & setosa\\
-5.4 & 3.9 & 1.3 & 0.4 & setosa\\
-5.1 & 3.5 & 1.4 & 0.3 & setosa\\
-5.7 & 3.8 & 1.7 & 0.3 & setosa\\
-5.1 & 3.8 & 1.5 & 0.3 & setosa\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-You can write citations, too. For example, we are using the \textbf{bookdown} package \citep{R-bookdown} in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015}.
+and relentlessly and continuously innovate.
 
 \hypertarget{elements-of-machine-learning}{%
 \chapter{Elements of Machine Learning}\label{elements-of-machine-learning}}
@@ -441,36 +341,43 @@ We give an overview of modern factor investing in this chapter. It is intended t
 
 \includegraphics[width=1\linewidth]{images/chapter3/nyc}
 
-Over the last 50 years, academic researchers have made major breakthroughs in advancing classical practice in finance, from fundamental analysis to scientific quantitative research. These include portfolio theory, corporate finance, financial engineering of derivative instruments, and many other applications pertaining to financial markets overall. One of the foundational pillar is the advances in capital market theory in the context of descriptive equilibrium propositions in terms of the risk/return tradeoff and the linear factor model to explain the expected asset price, beginning with William F. Sharpe and the {\emph{Capital Asset Pricing Model (CAPM)}} \citep{sharpe1964capital}. Many related academic developments provided rich asset pricing insight, including {\emph{Arbitrage Pricing Theory (APT)}} \citep{ross1976arbitrage}, market efficiency proposition, market anomalies such as the {\emph{Fama and French factor model}}, and behavioral finance. These altogether gave birth to a new investment paradigm - {\emph{factor investing}} - this is where classical financial textbooks end.
+Over the last 50 years, academic researchers have made major breakthroughs in advancing classical practice in finance, from fundamental analysis to scientific quantitative research. These include portfolio theory, corporate finance, financial engineering of derivative instruments, and many other applications pertaining to financial markets overall. One of the foundational pillar is the advances in capital market theory in the context of descriptive equilibrium propositions in terms of the risk/return tradeoff and the linear factor model to explain the expected asset price, beginning with William F. Sharpe and the {\emph{Capital Asset Pricing Model (CAPM)}} \citep{sharpe1964capital}. Many related academic developments provided rich asset pricing insight, including {\emph{Arbitrage Pricing Theory (APT)}} \citep{ross1976arbitrage}, market efficiency proposition, market anomalies such as the {\emph{Fama and French factor model}}, and behavioral finance. These altogether gave birth to a new investment paradigm - {\emph{factor investing}} - this is where classical finance textbooks end.
 
-The saying, ``change is the only constant in life'' is attributed to the Greek philosopher, Heraclitus around 500BC. This is even more prominent to the capital market. The evolution of financial market keeps testing the efficacy of the factor theory and model. Ever since the 2008 global financial crisis, we observe an irreversible performance decay of the traditional factor model that is solely based on conventional data and linear framework. In academia, there is also a replication crisis (or credibility crisis) raging on as ``most claimed research findings in financial economics are likely false.'' \citep{harvey2016and}
+The saying, \emph{``change is the only constant in life''} is attributed to the Greek philosopher, Heraclitus around 500BC. This is even more prominent to the capital market. The evolution of financial market keeps testing the efficacy of the factor theory and model. Ever since the 2008 global financial crisis, we observe an irreversible performance decay of the traditional factor model that is solely based on conventional data and linear framework. In academia, there is also a replication crisis (or credibility crisis) raging on as \emph{``most claimed research findings in financial economics are likely false.''} \citep{harvey2016and}
 
-Perhaps the Fourth Industrial Revolution has already come, and \emph{\href{https://www.gsb.stanford.edu/insights/andrew-ng-why-ai-new-electricity}{``AI is the new electricity''}}. During the trend, factor models and strategies have not remained static. Factor models and investment strategies evolve gradually over time, reflecting the evolution of capital markets and advances in data science theories, data availability, and investment practice. One of the exciting current innovation efforts in factor investing focus on exploiting new unstructured data sources - the {\emph{alternative data}}, applying new data science modeling techniques - {\emph{machine learning}} - this is where the modern factor investing starts.
+Perhaps the \emph{\href{https://www.weforum.org/agenda/2016/01/the-fourth-industrial-revolution-what-it-means-and-how-to-respond/}{Fourth Industrial Revolution}} - {\emph{digitalization}} - has already come, and \emph{\href{https://www.gsb.stanford.edu/insights/andrew-ng-why-ai-new-electricity}{``AI is the new electricity''}}. During this trend, factor models and strategies have not remained static. Factor models and investment strategies evolve gradually over time, reflecting the evolution of capital markets and advances in data science theories, data availability, and investment practice. The current innovation efforts in factor investing focus on exploiting new unstructured data sources - the {\emph{alternative data}}, applying new data science modeling techniques - {\emph{machine learning}} - this is where the modern factor investing starts.
 
 \hypertarget{overview-of-factor-investing}{%
 \section{Overview of Factor Investing}\label{overview-of-factor-investing}}
 
 \begin{quote}
-One of our central themes is that if assets are priced rationally, variables that are related to average returns, such as size and book-to-market equity, must proxy for sensitivity to common (shared and thus undiversifiable) risk factors in returns --- Fama and French (1993)
+One of our central themes is that if assets are priced rationally, variables that are related to average returns, such as size and book-to-market equity, must proxy for sensitivity to common (shared and thus undiversifiable) risk factors in returns --- \citet{fama1993common}
 \end{quote}
 
-The question of what drives asset returns has been a staple of neoclassical finance and remains a holly grail. The factor model emerged and became a foundation of asset pricing theory in the 1960s (Lintner, 1965; Mossin, 1966; Sharpe, 1964 and Treynor, 1961). In general, Factor can be defined as any underlying characteristic relating a group of assets (e.g., equity, bond) that is linearly significant in explaining their return and risk.
+The question of what drives asset returns has been a staple of neoclassical finance and remains a holly grail. The factor model emerged and became a foundation of asset pricing theory in the 1960s \citetext{\citealp{lintner1969valuation}; \citealp{mossin1966equilibrium}; \citealp{sharpe1964capital}; \citealp[and][]{treynor1961toward}}. In general, {\emph{Factor}} can be defined as any underlying characteristic relating a group of assets (e.g., equity, bond) that is linearly significant in explaining their return and risk.
 
-Factor investing refer to the general use of factors in the investment process. It is trustworthily a quantitative paradigm in investment where factor models renders return prediction signal, forecast expected asset risk, and drive asset allocation decisions by using the tradable factor portfolios. Practically, factor-driven investment strategies such as smart beta products amount to \$800 billion AUM worldwide (Johnson 2018) --- yes, we are talking about a magnificent investment topic that may affect everyone's saving pension.
+{\emph{Factor investing}} refer to the general use of factors in the investment process. It is trustworthily a quantitative paradigm in investment where factor models renders return prediction signal, forecast expected asset risk, and drive asset allocation decisions by using the tradable factor portfolios. Practically, factor-driven investment strategies such as smart beta products amount to \$800 billion AUM worldwide \citep{johnson2018etf} --- yes, we are talking about a magnificent investment topic that may affect everyone's saving pension.
 
-Fundamental factors are the bedrock of modern investment management and have served the needs of investors for a long time. For equities, in addition to countries and industries, fundamental factors documented through empirical research and used extensively in portfolio management include value, size, momentum, volatility, quality, yield, growth, and liquidity. A similar set of common macro drivers has been identified and used across asset classes, including equity, rates, credit, and real assets.
+As is recognized by \citet{fama1993common}, firm characteristics (or factors) are associated with the cross-section of expected returns. Assuming individual asset return \(r_{i,t}\), factor loadings \(z_{i,t}\) and factor return \(f_t\), factor model linearly specifies the relationship:
+
+\begin{equation} 
+r_{i,t} = z'_{i,t-1}  f_t + \alpha_{i,t} + u_{i,t}
+\label{eq:facmodel}
+\end{equation}
+
+Where, \(u_{i,t}\) it the noise term with expected zero return and \(\alpha_{i,t}\) is the intercept term of common OLS regression.
 
 Now that we have the mathematical formulation, we delve into the granular categories of the factors:
 
 \begin{itemize}
 \item
-  \textbf{Beta factors} --- factors corresponding to \(f_t\) are generally referred as ``risk premia factors'', which have reflected exposure to sources of systematic risk and are supposed to earn a persistent significant risk-compensated premium over long periods ({\emph{if all model assumptions work\ldots{}}}).
+  {\textbf{Beta factors}} --- factors corresponding to \(f_t\) are generally referred as ``risk premia factors'', which have reflected exposure to sources of systematic risk and are supposed to earn a persistent significant risk-compensated premium over long periods ({\emph{if all model assumptions work\ldots{}}}).
 
   In practice, they are called ``beta factors'' or ``style factors'' to denote that they are the drivers of systematic return and risk of assets. Furthermore, they are usually associated with the systematic risk that is inherent in market.
 
   Here the risk premium reward could be thought as selling insurance products to Mr.~Market. You undertake the risk to receive a positive reward on average in the long-term, when the risk does happen, Mr Market will come to you for coverage and you suffer a realized loss that should be well anticipated. If you believe the game is fair then you agree with the philosophy of \href{https://www.investopedia.com/terms/p/passiveinvesting.asp}{passive investing}.
 \item
-  \textbf{Alpha factors} --- some other factors fall into the \(\alpha_{i,t}\) term as they do not explain the risk well (e.g., {\emph{they are not volatile}}) and can not be included into the linear terms, yet they do earn persistent return over time with some predictive value to result in \(\alpha_{i,t} \neq 0\).
+  {\textbf{Alpha factors}} --- some other factors fall into the \(\alpha_{i,t}\) term as they do not explain the risk well (e.g., {\emph{they are not volatile}}) and can not be included into the linear terms, yet they do earn persistent return over time with some predictive value to result in \(\alpha_{i,t} \neq 0\).
 
   Alpha factor model are designed to forecast excess return of stocks. If return distribution is characterized by the expected return and the standard deviation, it is often the expected return predicted by alphas that determines whether we buy or sell, overweight or underweight, and the standard deviation driven by betas that determines the size of the portfolio allocations to hedge the undesirable systematic risk - this is the monologue of hedge funds or active investment.
 
@@ -479,17 +386,38 @@ Now that we have the mathematical formulation, we delve into the granular catego
   The alpha signals are often proprietary and highly guarded, reflecting creativity as well as superior systems. It is the most important differentiator within the investment firm.
 \end{itemize}
 
+Factors are the bedrock of quantitative investment management and have served the needs of investors for a long time. For equities, in addition to countries and industries, accounting-based fundamental factors documented through empirical research and used extensively in portfolio management include value, size, momentum, volatility, quality, yield, growth, and liquidity. A similar set of common macro drivers has been identified and used across asset classes, including equity, rates, credit, and real assets.
+
 \hypertarget{years-of-factor-investing-a-literature-review}{%
 \section{50 Years of Factor Investing: A Literature Review}\label{years-of-factor-investing-a-literature-review}}
 
-Factor research has been prevalent for over 40 years. The oldest and most well-known model of stock returns is the Capital Asset Pricing Model (CAPM), which is in essence a single-factor model with market as the sole factor (see Sharpe 1964). In other words, the expected return to any stock could be viewed as a function of its beta factor loading to the market . This won William Sharpe a Nobel Prize.
+Factor research has been prevalent for over 40 years. The oldest and most well-known model of stock returns is the {\emph{Capital Asset Pricing Model (CAPM)}}, which is in essence a single-factor model with market as the sole factor (see \citet{sharpe1964capital}). In other words, the expected return to any stock could be viewed as a function of its beta factor loading to the market . This won William Sharpe a Nobel Prize.
+
+Later, \citet{ross1976arbitrage} proposed the {\emph{Arbitrage pricing theory (APT)}} holds that the expected return of a financial asset can be modeled as a function of various macroeconomic factors or theoretical market indexes, thus introducing the ``multi-factor models''. Moreover, unlike the CAPM, APT theoretically validated that the number and nature of the APT factors were likely to change over time and vary across markets. Hence, the challenge shifts to build up the empirically sound factor models.
+
+Beyond the market factor, researchers generally look for risk premium factors that are \emph{persistent over time} and have strong explanatory power over a \emph{broad range of stocks}. There are three main categories of factors today: macroeconomic, statistical, and fundamental.
+
+\begin{itemize}
+\item
+  Macroeconomic factors include measures such as surprises in inflation \citep{chen1986economic}
+\item
+  Statistical factor models identify factors where the factors are not pre-specified in advance \citep{chamberlain1983arbitrage}
+\item
+  Fundamental factors are the mostly widely used and credit to \citet{fama1993common}. They put forward a model explaining US equity market returns with three fundamental actors: the \emph{Market}, the \emph{Size}, and the \emph{Value}. The ``Fama-French'' model, which today includes \citet{carhart1997persistence} \emph{Momentum} factor, has become a canon within the finance literature. -- Fama also later got a Nobel Prize.
+\end{itemize}
+
+In another vein, \citet{rosenberg1974extra} described the importance of the stock fundamental traits in explaining variation of stock returns, leading to the creation of the {\emph{multi-factor Barra risk models}} which is still the dominant risk model in equity investment.
 
 \hypertarget{limitedness-of-classical-factor-model-and-the-factor-zoo}{%
 \section{Limitedness of Classical Factor Model and the Factor Zoo}\label{limitedness-of-classical-factor-model-and-the-factor-zoo}}
 
-The enduring success of fundamental factors stems from the fact that they are guided by academic theory, and, importantly, are supported by empirical evidence and reflect investment practice, i.e., they make money. However, the story of factors turn into a horror fiction ever since the 2008 Global Financial Crisis. It is not only that some well-acclaimed factors that outperform in the past start to underperform, but also there are some lurking \href{https://en.wikipedia.org/wiki/Black_swan_theory}{black swan events} that causing extreme outliers where the model could fail drastically. In statistics this is usually associated with the {\emph{heavy-tailed}} distribution and we could sometimes remove or winsorize those data points as outliers when fitting a model. Nevertheless, in reality these outliers may mean you are doomed all at once.
+The enduring success of fundamental factors stems from the fact that they are guided by academic theory, and, importantly, are supported by empirical evidence and reflect investment practice, i.e., they make money. However, the story of factors turn into a horror fiction ever since the 2008 Global Financial Crisis. It is not only that some well-acclaimed factors that outperform in the past start to underperform (Fama-French's Value factor is lacklustre, see Figure \ref{fig:fig-fac-decay}), but also there are some lurking \href{https://en.wikipedia.org/wiki/Black_swan_theory}{black swan events} that causing extreme outliers where the model could fail drastically. In statistics, this is usually associated with the {\emph{heavy-tailed}} distribution and we could sometimes remove or winsorize those data points as outliers when fitting a model. Nevertheless, in reality these outliers may mean you are doomed all at once.
 
-To make a concrete example, lets remember David Viniar's, once the CFO of Goldman Sachs, famous explanation when Goldman's flagship GEO hedge fund had lost 27\% in 2007: \emph{``We were seeing things that were 25-standard deviation moves, several days in a row.''}. One commentator wryly noted:
+\begin{figure}
+\includegraphics[width=0.9\linewidth]{images/chapter3/fac_recent} \caption{Recent performance decay of Fama-French factor portfolios in US market}\label{fig:fig-fac-decay}
+\end{figure}
+
+To make a concrete example, lets remember David Viniar's, once the CFO of Goldman Sachs, famous explanation when Goldman's flagship GEO hedge fund had lost 27\% in 2007: {\emph{``We were seeing things that were 25-standard deviation moves, several days in a row.''}}. One commentator wryly noted:
 
 \begin{quote}
 That Viniar. What a comic. According to Goldman's mathematical models, August, Year of Our Lord 2007, was a very special month. Things were happening that were only supposed to happen once in every 100,000 years. Either that \ldots{} or Goldman's models were wrong (Bonner, 2007b).
@@ -502,21 +430,25 @@ More importantly, the underlying linearity assumption itself is an unrealistic a
 Another interesting trend is the ``factor zoo'' \citep{harvey2019census}, which refers to a metaphor for the growing number of investment factors proposed by both academics and practitioners. Not considering the less famous journals or the mysterious industry, there are already hundreds of factors claimed to be effective and published in top academic journals.\\
 
 \begin{figure}
-\includegraphics[width=0.9\linewidth]{images/chapter3/factor_zoo} \caption{Out of control factor production, (Harvey, 2019)}\label{fig:unnamed-chunk-2}
+\includegraphics[width=0.9\linewidth]{images/chapter3/factor_zoo} \caption{Out of control factor production (Harvey, 2019)}\label{fig:unnamed-chunk-2}
 \end{figure}
 
 This point out to the multiple testing problem: \emph{with so many factors tried, some will appear ``significant'' purely by chance}, and further indicates the peril of data mining, which may or may not be intentional. From a data science perspective, this also leads to the {\emph{high-dimension}} nature of the modern factor investing: we now have a ``zoo'' of available factor candidates and the traditional OLS linear regression is incompetent.
 
-Therefore, the linear model is at most a compromise in facing of the low noise-to-signal ratio data in financial market.
+Therefore, the linear model is at most a compromise in the face of the low noise-to-signal ratio data in financial market.
 
-\hypertarget{modern-factor-investing-in-the-big-data-and-machine-learning-trend}{%
-\section{Modern Factor Investing in the Big Data and Machine Learning Trend}\label{modern-factor-investing-in-the-big-data-and-machine-learning-trend}}
+\hypertarget{modern-factor-investing-in-the-wave-of-data-and-machine-learning}{%
+\section{Modern Factor Investing in the Wave of Data and Machine Learning}\label{modern-factor-investing-in-the-wave-of-data-and-machine-learning}}
 
 What is Big Data? A wide array of information sensing devices as well as the cloud service technique has led to an exponential growth in available big datasets. Starting from handheld mobiles, cameras, microphones, Internets, digitalised map, Internet of Things (IoT), to LiDAR (Light Detection and Ranging) sensors and satellite imaging. The amount of data that the world collects has experienced explosive growth. The rapid development of informative technologies has paved the way for a transition to digital world.
 
 The rapid advancement in the Internet and social media sectors has far reaching effects not only on our day to day lives; but also, for finance researchers and investors. Quantitative finance is no longer a subclass of finance but arguably the whole finance is evolving into a data-driven scientific subject. There comes a fashionable term in the finance domain - {\emph{alternative data}}.
 
 Alternative data is data not typically used by researchers and model builders and can be sourced from a kaleidoscope of data sources ranging from text, audio, image, graph, etc. These data sets typically have minimal aggregation and processing making them more {\emph{difficult}} to access and use. In the last several years, we have seen an explosion in the availability of new alternative data sources.
+
+\begin{figure}
+\includegraphics[width=0.9\linewidth]{images/chapter3/alt_data} \caption{Increasing number of alternative data vendors (Man Institute, 2019)}\label{fig:unnamed-chunk-3}
+\end{figure}
 
 \begin{itemize}
 \item
@@ -533,7 +465,7 @@ In another vein, much of the efforts have been focused on employing modern high-
 
 There has been an emerging body of pioneer academic work that reports phenomenal investment profitability based on signals generated by machine learning methods, let alone the long data science enthusiasm from investment industry. A funny observed phenomenon to echo this trend is that nowadays Machine Learning PhDs are more likely to land a researcher job in quantitative Hedge Funds than those pure Finance PhDs.
 
-We list some most influential papers here \ref{tab:ML-factor-tab} as a roadmap of the recent modern factor investing. The predictors column refer to the input features the research use to predict the stock returns, where Firm stands for typical firm-level factors and Macro represents the macro indices. In the forthcoming sections we will deep dive into some most representative ones (e.g., IPCA) alongside introducing the corresponding machine learning algorithm.
+We list some most influential machine learning in factor investing papers in the table \ref{tab:ML-factor-tab} as a roadmap of the recent modern factor investing. The predictors column refer to the input features the research use to predict the stock returns, where \emph{Firm} stands for typical firm-level factors and \emph{Macro} represents the macro indicator. In the forthcoming sections we will deep dive into some most representative ones (e.g., IPCA by \citet{kelly2019characteristics}) alongside introducing the corresponding machine learning algorithm.
 
 \begin{table}
 
@@ -557,23 +489,15 @@ Transformer & Nonlinear & Residual Term & Firm & JMG, 2021 & Deep learning stati
 \hypertarget{chapter-conclusion}{%
 \section{Chapter Conclusion}\label{chapter-conclusion}}
 
-Given the plethora of factors and the inevitable data mining, many of the historically discovered factors would be deemed ``significant'' by chance.
+Factor investing is a \emph{paradigm in quantitative finance} of more than 50 years history by linearly describing the asset return and risk using the effective and intuitive asset characteristics - \emph{factors}. It enjoys academic acclaim and is fundamentally adopted by industry.
 
-\hypertarget{applications}{%
-\chapter{Applications}\label{applications}}
+The recent performance decay of conventional factors points to the limitedness of the classical linear factor model. Moreover, the continued growing number of investment factors proposed by both academics and practitioners leads to a high-dimensional ``factor zoo'' in current factor world and the traditional linear regression thus become incompetent.
 
-Some \emph{significant} applications are demonstrated in this chapter.
+Current innovation efforts in factor investing focus on exploiting new unstructured data sources, applying new data science modeling techniques such as machine learning to harness the high-dimensional factors and identify the evolving complex market payoff pattern.
 
-\hypertarget{example-one}{%
-\section{Example one}\label{example-one}}
-
-\hypertarget{example-two}{%
-\section{Example two}\label{example-two}}
-
-\hypertarget{final-words}{%
-\chapter{Final Words}\label{final-words}}
-
-We have finished a nice book.
+\begin{quote}
+``Change is the only constant in financial market.'' - \href{https://fintelligence-academy.github.io}{Fintelligence}
+\end{quote}
 
   \bibliography{book.bib,packages.bib}
 
