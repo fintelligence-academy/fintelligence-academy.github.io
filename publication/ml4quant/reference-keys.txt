@@ -21,5 +21,5 @@ modern-factor-investing
 overview-of-factor-investing
 years-of-factor-investing-a-literature-review
 limitedness-of-classical-factor-model-and-the-factor-zoo
-modern-factor-investing-in-the-wave-of-data-and-machine-learning
+modern-factor-investing-in-the-wave-of-big-data-and-machine-learning
 chapter-conclusion
