@@ -10,6 +10,8 @@ fig:fig-fac-decay
 fig:unnamed-chunk-2
 fig:unnamed-chunk-3
 tab:ML-factor-tab
+eq:boosted
+eq:gbtree
 intro
 elements-of-machine-learning
 linear-regression
@@ -23,3 +25,9 @@ years-of-factor-investing-a-literature-review
 limitedness-of-classical-factor-model-and-the-factor-zoo
 modern-factor-investing-in-the-wave-of-big-data-and-machine-learning
 chapter-conclusion
+tree-based-models
+introduction-to-machine-learning-tree
+boosting-and-additive-trees
+gradient-boosting-tree
+algorithm
+chapter-conclusion-1

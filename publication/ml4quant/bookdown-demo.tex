@@ -84,7 +84,7 @@
 
 \title{Machine Learning for Quantitative Investment}
 \author{Fintelligence}
-\date{2022-01-29}
+\date{2022-04-03}
 
 \begin{document}
 \maketitle
@@ -497,6 +497,124 @@ Current innovation efforts in factor investing focus on exploiting new unstructu
 
 \begin{quote}
 ``Change is the only constant in financial market.'' - \href{https://fintelligence-academy.github.io}{Fintelligence}
+\end{quote}
+
+\hypertarget{tree-based-models}{%
+\chapter{Tree-based Models}\label{tree-based-models}}
+
+\begin{quote}
+We give an overview of tree-based machine learning model in this chapter, which is currently the \emph{GOAT}🐐 prediction model for tabular dataset. Neural networks dominate image recognition and language processing tasks, while tree-based methods 🌲 are often the method of choice for tabular data such as Kaggle competition. This chapter is cuurently working in progress.
+\end{quote}
+
+\hypertarget{introduction-to-machine-learning-tree}{%
+\section{Introduction to Machine Learning Tree 🌲}\label{introduction-to-machine-learning-tree}}
+
+Tree-based methods partition the feature space into a set of rectangles, and then fit a simple model (like a constant) in each one. They are conceptually simple yet powerful.
+
+Mathematically, given two predictors variables \(X_1\),\(X_2\), a tree model \(\hat{f}_{tree}\) is formulated as a sequence of \(K\) recursive binary partitions based on the feature \(X\) to fit the target variable \(Y\). The corresponding regression model predicts \(Y\) with a constant \(c_m\) in rectangle region \(R_m\) as:
+
+\[
+\hat{f}_{tree} (x) = \sum_{m=1}^K c_m I\{ (x_1, x_2) \in R_m \} 
+\]
+
+\includegraphics[width=1\linewidth]{images/chapter4/simple_tree}
+
+We now turn to the question of how to {\emph{grow}} a regression tree. The algorithm needs to automatically figure out the splitting variables, split points, as well as what topology (shape) the tree should have. Given a partition into \(K\) regions \(R_1, R_2,...,R_K\), we could start from use a constant \(c_m\) in each region to represent the shape:
+
+\[
+f_{tree} (X) = \sum_{m=1}^K c_m I\{ x \in R_m \} 
+\]
+Adopting the sum of squares \(\sum(y_i - f_{tree}(x_i))^2\) as objective to minimize, the best \(c_m\) will be the average of \(y_i\) within the region \(R_m\):
+\[
+\hat{c}_m = avg(y_i | x_i \in R_m)
+\]
+Finding the best binary partition in terms of minimum sum of squares is generally computationally infeasible. Hence we proceed with a greedy algorithm. Starting with all of the data, consider a splitting variable \(j\) and split point \(s\), and define the pair of half-planes \(R_{L}(j,s)={X|X_j \leq s},\; R_{R}(j,s)={X|X_j > s}\). We seek the splitting variable \(j\) and split point \(s\) that solves
+\[
+\min_{j,s}  [ \sum_{x_i \in R_{L}(j,s)} (y_i - \hat{c}_L) + \sum_{x_i \in R_{R}(j,s)} (y_i - \hat{c}_R)]
+\]
+Having found the best split, we partition the data into the two resulting regions and repeat the splitting process on each of the two regions. Then this process is repeated on all of the resulting regions until a stopping criterion is triggered.
+
+How large should we grow the tree? A very large tree might overfit the data, while a small tree might not capture the important structure. Tree size is a tuning parameter governing the model's complexity, and the optimal tree size should be adaptively chosen from the data. The preferred strategy is to grow a large tree \(T\), stopping the splitting process only when some minimum node size (e.g.~6 data point nodes) is reached. This large tree is next reversely (bottom-up) {\emph{pruned}} by using \emph{cost-complexity pruning}.
+
+Tree pruning ✂️ refers to collapse any number of its internal (non-terminal) nodes from tree \(T_0\) into a single subtree \(T \subset T_0\). Pruning a tree thus removes the split and helps to prevent overfitting the training data. We denote the number of terminal nodes in \(T\) as \(|T|\), next we derive the cost complexity criterion with hyperparameter \(\alpha\) to determine the \(T\):
+\[
+C_\alpha (T) \ \sum_{m=1}^{|T|}  \sum_{x_i \in R_m}(y_i - \hat{c}_m)^2 + \alpha |T|
+\]
+
+The idea is to find a tree \(T_{\alpha}\) that could minimize \(C_\alpha (T)\). Here the tuning \(\alpha\) governs the tradeoff between tree size and its goodness of fit to the data. Small values of \(\alpha\) result in larger trees \(T_{\alpha}\). With \(\alpha=0\), the solution is the full tree \(T_0\).
+
+\hypertarget{boosting-and-additive-trees}{%
+\section{Boosting and Additive Trees}\label{boosting-and-additive-trees}}
+
+Boosting is a predictive model paradigm developed for additive expansions by building models \(f_{(b)}(x)\) sequentially. This involves starting with a null model and then repeatedly fitting a small model to the residuals of the current model and updating the current model with a down-weighted or `shrunken' version of that weak models.
+
+\begin{equation} 
+\hat{f}^{boost}(x) = \sum_{b=1}^B \beta^b   f_{(b)}(x; \theta_b)
+\label{eq:boosted}
+\end{equation}
+
+\hypertarget{gradient-boosting-tree}{%
+\section{Gradient Boosting Tree}\label{gradient-boosting-tree}}
+
+The most popular variations of boosting are gradient boosting tree (GBT) and its modern variations (e.g.~LightGBM, XGBoost, CatBoost). Decision trees \(f_{(b)}^{tree}(x; \theta_b)\) are put as standard building block in the gradient boosting tree. GBT grows the tree sequentially by iteratively fitting the \(f_{(b)}^{tree}(x)\) through a gradient descent optimization manner with a shrinkage regularization parameter learning rate \(\lambda \in (0,1)\) to avoid overfitting.
+
+\begin{equation} 
+\hat{f}^{GBT}(x) = \sum_{b=1}^B \lambda^b   f_{(b)}(x; \theta_b)
+\label{eq:gbtree}
+\end{equation}
+
+\hypertarget{algorithm}{%
+\subsection{Algorithm}\label{algorithm}}
+
+We show the current standard algorithm to train a gradient boosting tree.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Algorithm}: Gradient Boosting Tree
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Input}: sample predictors \(X\), target response \(y\) of total data sample size \(N\)
+
+\textbf{Parameters}: \(B\): the number of boosting stages to perform, \(\lambda\): learning rate shrinks the contribution of each tree, \(\eta\): the fraction of subsamples to be used for fitting the individual base learner tree, \(d \in (1,2,...)\): the maximum depth of the individual regression estimators
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Set \(r_0 = y\) as initial point and fit a initial tree model \(f^{GBT}_{(0)}(x; d)\) on sample training data \((X, r_0)\)
+\item
+  For \(b=1,2,... , B\), repeat:
+
+  \begin{enumerate}
+  \def\labelenumii{(\alph{enumii})}
+  \item
+    {[} {\emph{functional gradient descent}} {]} For each data point \(j=1,2,...,N\), compute the gradient descent \(r_b = (r_{b,1}, r_{b,2}, ...)^T\) at stage \(b\) based on the pre-specified loss function \(\mathcal{L}\):
+
+    \[
+    r_{b,j} =  - \left[ \frac{ \partial \mathcal{L}(y_j, f(x_j) }{\partial f(x_j)} \right]_{f= f^{GBT}_{(b-1)} }
+    \]
+  \item
+    {[} {\emph{stochastic subsampling}} {]} sample a fraction \(\eta\) of the training observations to growth the next trees using the subsample \(\tilde{X}, \tilde{r}_{b}\)
+  \item
+    Fit a base regression tree \(f_{(b)}\) with \(d\) splits to the subsample training data (\(\tilde{X}\), \(\tilde{r}_{b}\))
+  \item
+    {[} {\emph{shrunk weighting}} {]} Update \(f^{GBT}_{(b)}(x) = f^{GBT}_{(b-1)}(x) + \lambda f_{(b)}(x)\)
+  \end{enumerate}
+\end{enumerate}
+
+End the training
+
+\textbf{Output}: the boosted model \(\hat{f}^{GBT}(x) = f^{GBT}_{(B)}(x) = \sum_{b=0}^B \lambda^b f_{(b)}(x; d)\)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{chapter-conclusion-1}{%
+\section{Chapter Conclusion}\label{chapter-conclusion-1}}
+
+While the forecasting performance of individual trees is notoriously poor, ensembles of trees built by {boosting} are currently considered the most successful approach to classification and regression for tabular data.
+
+\begin{quote}
+``Finance is not a plug-and-play subject as it relates to machine learning.'' - Marcos Lopez de Prado (2018), \href{https://fintelligence-academy.github.io}{Advances in Financial Machine Learning}
 \end{quote}
 
   \bibliography{book.bib,packages.bib}
