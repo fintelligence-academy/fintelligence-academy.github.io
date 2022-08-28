@@ -2895,12 +2895,13 @@ Figure 0.1: Prior&amp;Posterior. Héliopolis, Temples de Baalbek. Beaux-Arts de 
 </div>
 <p><br /></p>
 <blockquote>
-<p>In this section, we provide an introduction of the classical <span style="color:#6699FF"><strong>Black-Litterman (BL) model</strong></span> in the general form. We present BL implementation details and a Bayesian interpretation of the model. Moreover, we introduce a novel <span style="color:#6699FF"><strong>Bayesian Portfolio Optimization (BayPo)</strong></span> framework extended from BL and formally uncover the Bayesian backbone behind the BL. This serves as a prequel to the Bayesian Portfolio Optimizaiton and we will give more dedicated introduction in the forthcoming piece.</p>
+<p>In this block, we provide an introduction of the classical <span style="color:#6699FF"><strong>Black-Litterman (BL) model</strong></span> in the general form. We present BL implementation details and a Bayesian interpretation of the model. Moreover, we introduce a novel <span style="color:#6699FF"><strong>Bayesian Portfolio Optimization (BayPo)</strong></span> framework extended from BL and formally uncover the Bayesian backbone behind the BL. This serves as a prequel to the Bayesian Portfolio Optimizaiton and we will give more dedicated introduction in the forthcoming piece.</p>
 </blockquote>
 <p><br /></p>
 <div id="overview" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Overview</h1>
-<p>The original <span style="color:#6699FF"><strong>Black-Litterman (BL)</strong></span> model (see Black and Litterman [1990, 1991, 1992], He and Litterman [2002]) has five basic building blocks, as is shown below. The BL model allows portfolio managers to include their views (i.e., return expectations from forecast model) into the market implied returns (market prior).</p>
+<p>The <span style="color:#6699FF"><strong>Black-Litterman model</strong></span> (see Black and Litterman [1990, 1991, 1992], He and Litterman [2002]), originating from former Goldman Sachs systematic investment group, is one of the most popular portfolio optimization models in quantitative finance, with numerous theoretical and industry practical achievements. From the standpoint of investment theory, the Black-Litterman model allows a seamless incorporation of <span style="color:#6666FF"><em>Bayesian statistics</em></span> into the <span style="color:#6699FF"><strong>portfolio optimization process</strong></span>. From a practical standpoint, it provides portfolio managers with a structured approach to express subjective views, thereby freeing their investment processes from a total reliance on backward-looking historical data.</p>
+<p>The original <span style="color:#6699FF"><strong>Black-Litterman (BL)</strong></span> model essentially has five basic building blocks, as is shown below. The BL model allows portfolio managers to include their views (i.e., return expectations from forecast model) into the market implied returns (market prior).</p>
 <ul>
 <li>The capital asset pricing model (CAPM)</li>
 <li>Reverse optimization</li>
@@ -2908,9 +2909,9 @@ Figure 0.1: Prior&amp;Posterior. Héliopolis, Temples de Baalbek. Beaux-Arts de 
 <li>The concept of a universal hedge ratio</li>
 <li>Mean-variance optimization</li>
 </ul>
-<div id="implied-expected-market-return-by-capm" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Implied Expected Market Return by CAPM</h2>
-<p>First, we consider a market with <span class="math inline">\(n\)</span> assets, whose returns are assumed to be normally distributed:</p>
+<div id="implied-expected-market-return-mathbfpi-by-capm" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Implied Expected Market Return <span class="math inline">\(\mathbf{\pi}\)</span> by CAPM</h2>
+<p>To set the scene of Black-Litterman model set-up, first, we consider a market with <span class="math inline">\(n\)</span> assets, whose returns are assumed to be normally distributed:</p>
 <p><span class="math display">\[
 \mathbf{r} \sim \mathbf{N}(\mathbf{\mu}, \Sigma)
 \]</span>
@@ -2942,6 +2943,7 @@ Where, <span class="math inline">\(\mathbf{\pi} \in \mathbb{R}^{n \times 1}\)</s
 </div>
 <div id="investor-views-mathbfq-under-bl" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Investor Views <span class="math inline">\(\mathbf{q}\)</span> under BL</h2>
+<p>View is a quintessential component of BL model, where investors could blend their multiple investment views into numerical model input as expected return. Here we introduce the view section of the BL model architecture.</p>
 <p>Investors form their views in many different ways. Two typical approaches are:</p>
 <ul>
 <li><p><strong>Absolute view</strong>: for example, we may have a model that predicts the return of a stock to be 5% over the next year; or</p></li>
@@ -2961,14 +2963,19 @@ Where, <span class="math inline">\(\mathbf{\pi} \in \mathbb{R}^{n \times 1}\)</s
 </div>
 <div id="bl-bayesian-posterior-esimation" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> BL Bayesian Posterior Esimation</h2>
-<p>After applying Bayes’ theorem, the <span style="color:#6699FF"><em>posterior probability of the expected return</em></span> vector <span class="math inline">\(\mathbb{E} [ \mathbf{r} ] | \mathbf{\pi}\)</span> follows a <em>multivariate normal distribution</em> with the following mean and variance.</p>
+<p>After applying Bayes’ theorem, the <span style="color:#6699FF"><em>posterior probability of the expected return</em></span> vector <span class="math inline">\(\hat{\mathbf{r}} = \mathbb{E} [ \mathbf{r} ] | \mathbf{\pi}\)</span> follows a <em>multivariate normal distribution</em> with the following mean and variance.</p>
 <p><span class="math display">\[\begin{equation}
-\mathbf{\mu}_{BL} = \bigl( ( \tau  \mathbf{\Sigma})^{-1} + \mathbf{P}&#39; \mathbf{\Omega}^{-1} \mathbf{P} \bigr)^{-1}
+\mathbf{\mu}_{\hat{\mathbf{r}}} = \bigl( ( \tau  \mathbf{\Sigma})^{-1} + \mathbf{P}&#39; \mathbf{\Omega}^{-1} \mathbf{P} \bigr)^{-1}
 \bigl( ( \tau  \mathbf{\Sigma})^{-1} \mathbf{\pi} +   \mathbf{P}&#39; \mathbf{\Omega}^{-1} \mathbf{q} \bigr)
 \\
-\mathbf{\Sigma}_{BL} = \bigl( ( \tau  \mathbf{\Sigma})^{-1} + \mathbf{P}&#39; \mathbf{\Omega}^{-1} \mathbf{P}\bigr)^{-1}
+\mathbf{\Sigma}_{\hat{\mathbf{r}}} = \bigl( ( \tau  \mathbf{\Sigma})^{-1} + \mathbf{P}&#39; \mathbf{\Omega}^{-1} \mathbf{P}\bigr)^{-1}
 \end{equation}\]</span></p>
-<p>Assuming the uncertainty in the estimates is independent of the covariance of asset returns, the final covariance matrix is:</p>
+<p>Assuming the uncertainty in the estimates is independent of the covariance of asset returns, the final covariance matrix <span class="math inline">\(\mathbf{\Sigma}_{BL}\)</span> is:</p>
+<p><span class="math display">\[\begin{equation}
+\mathbf{\Sigma}_{BL} = \mathbf{\Sigma} + \mathbf{\Sigma}_{\hat{\mathbf{r}}}
+\end{equation}\]</span></p>
+<p>Having attained the posterior expected return and covaraince, we could substitute the two as return and risk forecast and apply the conventional Mean-Variance Optimization (MVO) to derive the final optimal BL holdings $ _{BL}$. In practice, this could be done by commercial portfolio optimizer.</p>
+<p><br /></p>
 </div>
 <div id="a-naive-bl-example" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> A Naive BL Example</h2>
