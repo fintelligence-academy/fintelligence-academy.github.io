@@ -2954,11 +2954,11 @@ Where, <span class="math inline">\(\mathbf{\pi} \in \mathbb{R}^{n \times 1}\)</s
 <p><span style="color:#6699FF"><strong>Investor Confidence</strong></span> - Under the BL model, the error term is normally distributed with zero mean and a variance-covariance matrix of <span class="math inline">\(\mathbf{\Omega}\)</span>, thus the confidence of our views is expressed by taking the inverse of the <span class="math inline">\(\mathbf{\Omega}\)</span> matrix as <span class="math inline">\(\mathbf{\Omega}^{-1}\)</span></p>
 <p>Hence, investors’ views also follow a multivariate distribution:</p>
 <p><span class="math display">\[
-\mathbf{P} \cdot \mathbb{E} [ \mathbf{r} ]  \sim \mathcal{N}(\mathbf{q}, \tau \mathbf{\Sigma} \bigr)
+\mathbf{P} \cdot \mathbb{E} [ \mathbf{r} ]  \sim \mathcal{N}(\mathbf{q}, \mathbf{\Omega} \bigr)
 \]</span></p>
 <p>The conditional equilibrium return vector is distributed as:</p>
 <p><span class="math display">\[
-\mathbf{\pi} | \mathbb{E} [ \mathbf{r} ] \sim \mathcal{N} \bigl( \mathbb{E}[\mathbf{r}], \mathbf{\Omega})
+\mathbf{\pi} | \mathbb{E} [ \mathbf{r} ] \sim \mathcal{N} \bigl( \mathbb{E}[\mathbf{r}], \tau \mathbf{\Sigma})
 \]</span></p>
 </div>
 <div id="bl-bayesian-posterior-esimation" class="section level2" number="1.3">
